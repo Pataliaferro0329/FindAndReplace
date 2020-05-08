@@ -39,7 +39,7 @@ int main(int argc, char * argv[]) {
 	}
 
 	
-	//create new file and copy in cBuffe
+	//create new file and copy in cBuffer
 	std::ofstream ofs(argv[1],std::ofstream::out);
 	int j;
 
@@ -53,12 +53,12 @@ int main(int argc, char * argv[]) {
 		if(j > usLengthOfReplacedString)
 		{
 			ofs.write(argv[3],usLengthOfReplacingString);
-			i += usLengthOfReplacedString;
-			i--;
+			i += usLengthOfReplacedString - 1;
 			ulOccuranceCount++;
 		}
 		else ofs.put(cBuffer[i]);
 	}
+	//Need to write the end of the buffer
 
 	//print out how many occurances there were
 	std::cout << "Number of Changes: " << unsigned(ulOccuranceCount) << "\n";
