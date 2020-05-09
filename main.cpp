@@ -31,14 +31,14 @@ int main(int argc, char * argv[]) {
 
 	ifs.close();
 
-	if (remove(argv[1]) == 0) std::cout << "Deleted Successfully\n";
-	else 
+	if (remove(argv[1]) != 0)
 	{
-		std::cout <<"remove() unsuccessful\n"; //rewrite 
+		std::cout <<"ERROR: File work error - remove(<File_Name>) != 0\n";
+	       	std::cout <<"Most Likely due to not high enough priveleges\n"; 
 		return 0; 
 	}
 
-	for(int i = 0; i < ulSizeOfFile; i++) std::cout << cBuffer[i];	
+	//for(int i = 0; i < ulSizeOfFile; i++) std::cout << cBuffer[i];	
 	
 	std::ofstream ofs(argv[1],std::ofstream::out);
 	int j;
@@ -58,17 +58,17 @@ int main(int argc, char * argv[]) {
 			ofs.write(argv[3],usLengthOfReplacingString);
 			i += usLengthOfReplacedString - 1;
 			ulOccuranceCount++;
-			for(int k = 0; k < usLengthOfReplacedString; k++) std::cout << argv[3][k];
+			//for(int k = 0; k < usLengthOfReplacedString; k++) std::cout << argv[3][k];
 		}
 		else 
 		{
 			ofs.put(cBuffer[i]);
-			std::cout << cBuffer[i];
+			//std::cout << cBuffer[i];
 		}
 	}
 	//Need to write the end of the buffer
 	ofs.write(&cBuffer[ulSizeOfFile - usLengthOfReplacedString],usLengthOfReplacedString);
-	for(int i = usLengthOfReplacedString; i > 0; i--) std::cout << cBuffer[ulSizeOfFile - i];
+	//for(int i = usLengthOfReplacedString; i > 0; i--) std::cout << cBuffer[ulSizeOfFile - i];
 
 	//print out how many occurances there were
 	std::cout << "\nNumber of Changes: " << unsigned(ulOccuranceCount) << "\n";
